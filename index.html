@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nicolly, te amo &hearts;</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #832232;
+        width: 100vw;
+        color: #eee;
+        overflow: hidden;
+        height: 100vh;
+      }
+
+      div {
+        position: absolute;
+        background-image: url("https://www.freeiconspng.com/thumbs/heart-png/heart-png-15.png");
+        width: 100px;
+        height: 100px;
+        background-size: 100% 100%;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        padding: 15px;
+        font-family: cursive;
+        transition: opacity 0.2s ease-in;
+      }
+
+      div span {
+        margin-top: -12px;
+        display: inline-block;
+        max-width: 100%;
+      }
+    </style>
+  </head>
+  <body></body>
+  <script>
+    (function play() {
+      const words = [
+        "Você é linda",
+        "Você é incrível",
+        "Você é maravilhosa",
+        "Te amo muito",
+        "Te amo para sempre",
+        "Te amo mil milhões",
+        "Você é minha luz",
+        "Você é meu mundo",
+        "Você é meu céu",
+        "Você é tudo",
+        "Sua beleza me encanta",
+        "Você é gostosa",
+        "Você merece o mundo",
+        "Você é a mais bela de todas",
+        "Minha beldade",
+        "J x N",
+        "João & Nicolly",
+        "JPro te ama",
+        "Você é minha amada",
+        "Você é minha alma gêmea",
+      ];
+      const html = (text) => `<div>
+      <span>${text}</span>
+    </div>`;
+
+      function sort() {
+        return words[Math.floor(Math.random() * words.length)];
+      }
+      function sortWidth() {
+        return Math.floor(Math.random() * (window.innerWidth - 105));
+      }
+      function rotate(el) {
+        let deg = 0;
+        return setInterval(() => {
+          deg = deg > 360 ? 0 : (deg += 0.5);
+          el.style.transform = `rotate(${deg}deg)`;
+        }, 20);
+      }
+      function goUp(el) {
+        let limit = window.innerHeight;
+        const interval = setInterval(() => {
+          limit =
+            limit > -120
+              ? (limit -= 2)
+              : (() => {
+                  clearInterval(interval);
+                  el.remove();
+                })();
+          el.style.top = limit + "px";
+        }, 20);
+      }
+      function generate() {
+        document.body.insertAdjacentHTML("beforeend", html(sort()));
+        const child = document.body.lastElementChild;
+        child.style.left = sortWidth() + "px";
+        child.style.top = window.innerHeight + "px";
+        rotate(child);
+        goUp(child);
+      }
+
+      setInterval(generate, 2500);
+    })();
+  </script>
+</html>
